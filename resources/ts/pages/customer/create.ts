@@ -1,10 +1,10 @@
 import { Ajax } from "../../support/ajax";
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#form-create-user')?.addEventListener('submit', createUser);
+    document.querySelector('#form-create-customer')?.addEventListener('submit', createCustomer);
 }, {once: true});
 
-function createUser(event: Event): void
+function createCustomer(event: Event): void
 {
     event.preventDefault();
     const FORM = event.currentTarget as HTMLFormElement;

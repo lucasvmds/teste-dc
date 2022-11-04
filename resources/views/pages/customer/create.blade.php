@@ -2,7 +2,7 @@
 @section('content')
     <main class="container">
         <h1>Cadastrar Cliente</h1>
-        <form id="form-create-user">
+        <form id="form-create-customer">
             @csrf
             
             <x-form.input label="Nome" type="text" size="60" name="name" required />
@@ -19,7 +19,7 @@
         </form>
     </main>
     <aside class="btn-group" role="group">
-        <button type="submit" class="btn btn-primary" form="form-create-user">
+        <button type="submit" class="btn btn-primary" form="form-create-customer">
             Salvar
         </button>
         <a href="{{route('customers.index')}}" class="btn btn-primary">

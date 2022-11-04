@@ -2,7 +2,7 @@
 @section('content')
     <main class="container">
         <h1>Clientes</h1>
-        <table class="table table-hover">
+        <table id="customers" class="table table-hover">
             <thead>
                 <tr>
                     <th>Código</th>

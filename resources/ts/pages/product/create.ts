@@ -1,16 +1,16 @@
 import { Ajax } from "../../support/ajax";
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#form-edit-customer')?.addEventListener('submit', editCustomer);
+    document.querySelector('#form-create-product')?.addEventListener('submit', createProduct);
 }, {once: true});
 
-function editCustomer(event: Event): void
+function createProduct(event: Event): void
 {
     event.preventDefault();
     const FORM = event.currentTarget as HTMLFormElement;
     Ajax.request({
-        url: `/customers/${FORM.dataset.id}`,
-        method: 'PATCH',
+        url: '/products',
+        method: 'POST',
         body: new FormData(FORM),
     });
 }

@@ -2,7 +2,7 @@
 @section('content')
     <main class="container">
         <h1>Editar Cliente</h1>
-        <form id="form-edit-user" data-id="{{$customer->id}}">
+        <form id="form-edit-customer" data-id="{{$customer->id}}">
             @csrf
             <x-form.input label="Nome" type="text" size="60" name="name" required value="{{$customer->name}}" />
             <br />
@@ -18,7 +18,7 @@
         </form>
     </main>
     <aside class="btn-group" role="group">
-        <button type="submit" class="btn btn-primary" form="form-edit-user">
+        <button type="submit" class="btn btn-primary" form="form-edit-customer">
             Salvar
         </button>
         <a href="{{route('customers.index')}}" class="btn btn-primary">
