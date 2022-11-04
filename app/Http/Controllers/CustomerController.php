@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\Customer\CreateNewCustomer;
+use App\Actions\Customer\SearchCustomers;
 use App\Actions\Customer\UpdateCustomer;
 use App\Actions\DeleteOrRestoreModel;
 use App\Http\Requests\Customer\StoreUpdateRequest;
 use App\Models\Customer;
 use App\Support\Facades\Messages;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CustomerController extends Controller
@@ -68,6 +70,13 @@ class CustomerController extends Controller
         DeleteOrRestoreModel::run($customer);
         return [
             'success' => route('customers.index'),
+        ];
+    }
+
+    public function search(Request $request): array
+    {
+        return [
+            'data' => SearchCustomers::run($request->query('search', '')),
         ];
     }
 }

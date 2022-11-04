@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'auth.session'])->group(function() {
     Route::delete('customers/{customer}', [CustomerController::class, 'destroy'])
         ->withTrashed()
         ->name('customers.destroy');
+    Route::get('customers/search', [CustomerController::class, 'search'])->name('customers.search');
 
     Route::resource('products', ProductController::class)->except([
         'show',
@@ -34,4 +36,7 @@ Route::middleware(['auth', 'auth.session'])->group(function() {
     Route::delete('products/{product}', [ProductController::class, 'destroy'])
         ->withTrashed()
         ->name('products.destroy');
+    Route::resource('sales', SaleController::class)->except([
+        'show',
+    ]);
 });

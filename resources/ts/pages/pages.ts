@@ -5,3 +5,4 @@ import "./customer/edit";
 import "./product/index";
 import "./product/create";
 import "./product/edit";
+import "./sale/create";
