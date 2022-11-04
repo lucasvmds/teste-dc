@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\Develop\CustomerSeeder;
 use Database\Seeders\Production\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $local_seeders = [
-
+            CustomerSeeder::class,
         ];
         $this->call([
             UserSeeder::class,

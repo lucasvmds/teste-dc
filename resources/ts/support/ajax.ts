@@ -20,12 +20,25 @@ export class Ajax
 {
     public static async request<T = object>({url, method, body}: RequestParams): Promise<T|void|null>
     {
+        const HEADERS = {
+            'X-Requested-With': 'XMLHttpRequest',
+        };
+
+        switch (method) {
+            case 'DELETE':
+                HEADERS['X-CSRF-TOKEN'] = Ajax.getCsrfToken();
+                break;
+            case 'PATCH':
+            case 'PUT':
+                body = Ajax.handleBodyForJsonRequests(body);
+                HEADERS['Content-Type'] = 'application/json';
+                break;
+        }
+
         return fetch(url, {
             method: method ?? 'GET',
             body,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            }
+            headers: HEADERS,
         })
             .then<FetchResponse<T>>(response => response.json())
             .then<T|null>(response => {
@@ -57,5 +70,23 @@ export class Ajax
     private static cleanErrors(): void
     {
         document.querySelectorAll('.is-invalid').forEach(node => node.classList.remove('is-invalid'));
+    }
+
+    private static handleBodyForJsonRequests(body: FormData): string|undefined
+    {
+        if (! body) return body;
+
+        const DATA = {};
+        for (const ITEM of body.entries()) {
+            DATA[ITEM[0]] = ITEM[1];
+        }
+        return JSON.stringify(DATA);
+    }
+
+    private static getCsrfToken(): string
+    {
+        const META = document.querySelector('meta[name="token"]');
+        if (! META) throw new Error('Tag meta[name="token"] not found');
+        return META.getAttribute('content') ?? '';
     }
 }

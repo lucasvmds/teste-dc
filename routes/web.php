@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'attempt'])->name('login.attempt');
-Route::middleware('auth')->group(function() {
-    Route::view('/', 'welcome')->name('welcome');
+Route::middleware(['auth', 'auth.session'])->group(function() {
+    Route::resource('customers', CustomerController::class)->except([
+        'show',
+        'destroy',
+    ]);
+    Route::delete('customers/{customer}', [CustomerController::class, 'destroy'])
+        ->withTrashed()
+        ->name('customers.destroy');
 });

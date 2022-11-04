@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function index(): View|RedirectResponse
     {
         return Auth::check() ?
-            redirect()->route('welcome') :
+            redirect()->route('customers.index') :
             view('pages.login.index');
     }
 
@@ -24,7 +24,7 @@ class LoginController extends Controller
     {
         if (AttemptLoginUser::run($request->validated())) {
             return [
-                'success' => route('welcome'),
+                'success' => route('customers.index'),
             ];
         } else {
             return [

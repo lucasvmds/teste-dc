@@ -7,6 +7,7 @@
         <title>Teste DC</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
+        <meta name="token" content="{{csrf_token()}}" />
         @vite([
             'resources/ts/app.ts',
         ])
