@@ -1,0 +1,9 @@
+#alerts-container {
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    z-index: 500;
+    & > p {
+        cursor: pointer;
+    }
+}
